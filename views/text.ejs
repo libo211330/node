@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		div{
+			width: 300px;
+			margin: 0 auto;
+		}
+		#box{
+			width: 300px;height: 500px;
+			border:3px solid red;
+			margin: 0 auto;
+		}
+		.inp{
+			display: block;
+			margin-bottom: 20px;
+		}
+		#commit,#next{
+			display: inline-block;
+			width: 90px;
+			height: 30px;
+			border-width: 0;
+			background: #f0f;
+			color:#ccc;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+	<h3>标题</h3>
+	<input type="text" class="inp">
+
+	<button>加粗</button>
+	<button>倾斜</button>
+	<button>下划线</button>
+	<button>字体变红</button>
+	<button>背景颜色</button>
+	<button>点击复制文本</button>
+	<button>左对齐</button>
+	<button>居中对齐</button>
+	<button>右对齐</button>
+	<div id="box" contenteditable="true"></div>
+	
+	<button id="commit">提交</button>
+	<button id="next">返回首页</button>
+
+	</div>
+	<script src="./jquery.js"></script>
+	<script>
+		var box=document.getElementById('box');
+		var btn=document.getElementsByTagName('button')
+		btn[0].onclick=function(){
+			document.execCommand("Bold")
+		}
+		btn[1].onclick=function(){
+			document.execCommand("Italic")
+		}
+		btn[2].onclick=function(){
+			document.execCommand("underline")
+		}
+		btn[3].onclick=function(){
+			document.execCommand("ForeColor",true,"#f00")
+		}
+		btn[4].onclick=function(){
+			document.execCommand("BackColor",true,"#f0f")
+		}
+		btn[5].onclick=function(){
+			document.execCommand("Copy")
+		}
+		btn[6].onclick=function(){
+			document.execCommand("JustifyLeft")
+		}
+		btn[7].onclick=function(){
+			document.execCommand("JustifyCenter")
+		}
+		btn[8].onclick=function(){
+			document.execCommand("JustifyRight")
+		}
+
+		
+		$("#commit").on("click",function(){
+			var tit=$(".inp").val()
+			var content=$("#box").text()
+			console.log(tit)
+			console.log(content)
+			$.ajax({
+				url:"/add",
+				type:"post",
+				data:{tit:tit,content:content},
+				success:function(msg){
+					console.log(msg)
+					alert(msg.data)
+				}
+			})
+		})
+		$("#next").on("click",function(){
+			window.location.href="/"
+		})
+		
+	</script>
+</body>
+</html>

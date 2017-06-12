@@ -5,6 +5,7 @@
 	<title>Document</title>
 </head>
 <body>
+	
 	<div id="box">
 		
 	</div>
@@ -18,16 +19,15 @@
 		data:{no:no},
 		type:"post",
 		success:function(msg){
-			msg.forEach(function(i){	
+			msg.forEach(function(i){		
 				var set="";
-				set+="<ul><li>姓名:"+i.name+"</li>"
-				+"<li>性别："+i.age+"</li>"
-				+"<li>年龄："+i.sex+"</li>"
-				+"<li>职业："+i.work+"</li>"
-				+"<li>喜好："+i.like+"</li>"
+				set+="<ul><li>姓名:"+i.tit+"</li>"
+				+"<li>性别："+i.content+"</li>"
+				+"<li>访问量："+i.num+"</li>"
 				+"</ul>"
 				$("#box").html(set)
 			})
+
 		}
 	})
 	

@@ -23,14 +23,18 @@
 <body>
 	<div class="box">
 		<h3>李泊的博客</h3>
+		<p class="btn">点击添加文本内容</p>
 		<ul>
 			<%data.forEach(function(i){%>
-				<li><span class="no"><%=i.no%></span><%=i.name%></li>
+				<li><span class="no"><%=i.no%></span><%=i.tit%></li>
 			<%})%>
 		</ul>
 	</div>
 	<script src="./jquery.js"></script>
 	<script>
+	$(".btn").on("click",function(){
+		window.location.href="/text"
+	})
 		$("li").on("click",function(){
 			var name=$(this).text()
 			var no=$(this).children(".no").text()
@@ -40,6 +44,17 @@
 				data:{no:no},
 				success:function(){
 					window.location.href="/list?no="+no
+				}
+			})
+			$.ajax({
+				url:"/counter",
+				type:"post",
+				data:{no:no},
+				success:function(){
+					if(msg=='ok'){
+					window.location.href="/list?no="+no
+						
+					}
 				}
 			})
 		})

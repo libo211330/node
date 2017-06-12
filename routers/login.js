@@ -6,7 +6,7 @@ var mysql=require("mysql")
 var connection=require("./mysql.js")(mysql)
 
 router.get("/",function(req,res){
-	connection.query("select * from name",function(err,data){
+	connection.query("select * from newspaper",function(err,data){
 		res.render('login',{
 			data:data
 		})
