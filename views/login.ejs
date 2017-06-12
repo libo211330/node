@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;padding: 0;
+			list-style: none;
+		}
+		.box{
+			margin: 0 auto;
+			width: 800px;
+			height: auto;
+		}
+		p{
+			font-size: 10px;
+			color:#f00;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<h3>李泊的博客</h3>
+		<ul>
+			<%data.forEach(function(i){%>
+				<li><span class="no"><%=i.no%></span><%=i.name%></li>
+			<%})%>
+		</ul>
+	</div>
+	<script src="./jquery.js"></script>
+	<script>
+		$("li").on("click",function(){
+			var name=$(this).text()
+			var no=$(this).children(".no").text()
+			$.ajax({
+				url:"/index",
+				type:"post",
+				data:{no:no},
+				success:function(){
+					window.location.href="/list?no="+no
+				}
+			})
+		})
+	 </script>
+</body>
+</html>
